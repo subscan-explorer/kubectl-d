@@ -113,6 +113,18 @@ func (p *EphemeralContainer) Do(client kubernetes.Interface) error {
 	if err != nil {
 		return errors.Wrap(err, "patch pod error")
 	}
+	// 等待ephemeral container创建完成
+	for {
+		fmt.Println("waiting for ephemeral container create...")
+		pod, err = pods.Get(context.Background(), p.podName, metav1.GetOptions{})
+		if err != nil {
+			return errors.Wrap(err, "get pod error")
+		}
+		if len(pod.Status.EphemeralContainerStatuses) != 0 {
+			break
+		}
+		time.Sleep(1 * time.Second)
+	}
 	return p.startShell(ephemeralContainerName)
 }
 
