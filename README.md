@@ -13,4 +13,9 @@ go install github.com/subscan-explorer/kubectl-debug@latest
 ## Usage
 
 - Run `kubectl-debug` in the terminal to enter interactive command line mode. Follow the prompts to operate.
+[![asciicast](https://asciinema.org/a/607671.svg)](https://asciinema.org/a/607671)
 - Use the following command directly to create a temporary container and enter it:
+```
+kubectl-debug -n <namespace> <pod-name> -c <container-name> -capabilities <capabilities> -capabilities <capabilities> -image <debug-image>
+```
+[![asciicast](https://asciinema.org/a/607672.svg)](https://asciinema.org/a/607672)
