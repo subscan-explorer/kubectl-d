@@ -4,8 +4,8 @@ import (
 	"flag"
 	"github.com/spf13/cast"
 	"k8s.io/client-go/util/homedir"
-	"kubectl-debug/pkg"
-	"kubectl-debug/pkg/args"
+	"kubectl-d/pkg"
+	"kubectl-d/pkg/args"
 	"path/filepath"
 )
 

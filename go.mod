@@ -1,4 +1,4 @@
-module kubectl-debug
+module kubectl-d
 
 go 1.20
 
