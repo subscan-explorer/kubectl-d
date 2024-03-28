@@ -116,6 +116,7 @@ func (p *EphemeralContainer) Do(client kubernetes.Interface) error {
 	// 等待ephemeral container创建完成
 	for {
 		fmt.Println("waiting for ephemeral container create...")
+		time.Sleep(5 * time.Second)
 		pod, err = pods.Get(context.Background(), p.podName, metav1.GetOptions{})
 		if err != nil {
 			return errors.Wrap(err, "get pod error")
@@ -123,7 +124,7 @@ func (p *EphemeralContainer) Do(client kubernetes.Interface) error {
 		if len(pod.Status.EphemeralContainerStatuses) != 0 {
 			break
 		}
-		time.Sleep(1 * time.Second)
+
 	}
 	return p.startShell(ephemeralContainerName)
 }
@@ -135,6 +136,8 @@ func (p *EphemeralContainer) startShell(ephemeralContainerName string) error {
 	cmd.Stdin = os.Stdin
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
-	fmt.Println(cmd.String())
-	return cmd.Run()
+	if err := cmd.Run(); err != nil {
+		fmt.Printf("exec command error: %v, your can try run '%s' into ephemeral containe.\n", err, cmd.String())
+	}
+	return nil
 }

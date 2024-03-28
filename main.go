@@ -3,9 +3,9 @@ package main
 import (
 	"flag"
 	"github.com/spf13/cast"
+	"github.com/subscan-explorer/kubectl-d/pkg"
+	"github.com/subscan-explorer/kubectl-d/pkg/args"
 	"k8s.io/client-go/util/homedir"
-	"kubectl-d/pkg"
-	"kubectl-d/pkg/args"
 	"path/filepath"
 )
 
